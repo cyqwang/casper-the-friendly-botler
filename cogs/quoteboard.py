@@ -41,7 +41,9 @@ class Quoteboard(commands.Cog):
 		quote_channel = self.bot.get_channel(self.channel)
 
 		if reaction.count < self.min_react:
+			print("here")
 			star_msg = self.starred_messages.pop(message.id, None)
+			print(star_msg)
 			await star_msg.delete()
 		else:
 			embedVar = discord.Embed(title=f'{message.author.name} in #{message.channel}', \
