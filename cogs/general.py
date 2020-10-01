@@ -4,16 +4,23 @@ from discord.ext import tasks, commands
 
 import json
 setupfile = open("load/setup.json", "r")
-setup = json.loads(setupfile.read())
+setupdict = json.loads(setupfile.read())
 setupfile.close()
 
 class General(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
+		self.welcome_msg = setupdict["welcome-message"]
 
 	@commands.command(name='help')
 	async def help(self, ctx):
 		await ctx.send("Check out my help documentation at https://tinyurl.com/CasperReference")
+	
+	@commands.Cog.listener()
+	async def on_member_join(self, member):
+		friend_role = setupdict["roles"]["friend-of-house"]
+		await member.add_roles(discord.utils.get(member.guild.roles, name=friend_role))
+		await self.bot.get_channel(setupdict["channels"]["general"]).send(f'Hi {member.mention}! {self.welcome_msg}')
 
 	@commands.command(name='get-txt-channel-id', help='get #text-channel id')
 	async def get_txt_id(self, ctx, channel: discord.TextChannel):

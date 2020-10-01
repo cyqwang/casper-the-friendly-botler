@@ -1,6 +1,5 @@
-- add casper to github (without load files)
+- write up #casper-guide
 - check that shopping is working
-- add casper to beast+run an instance with adjusted parameters
 - datetime ahhh
     + chores
     + rent-breakdown
