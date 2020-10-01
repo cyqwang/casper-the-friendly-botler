@@ -34,13 +34,16 @@ class Quoteboard(commands.Cog):
 				self.starred_messages[message.id] = await quote_channel.send(embed=embedVar)
 
 	@commands.Cog.listener()
-	async def on_reaction_remove(self, reaction, user):
-		if (reaction.emoji != self.reaction): return
+	async def on_raw_reaction_remove(self, reaction_payload):
+		print("here")
+		if (reaction_payload.emoji.name != self.reaction): return
 
-		message = reaction.message
+		message = await self.bot.get_channel(reaction_payload.channel_id).fetch_message(reaction_payload.message_id)
 		quote_channel = self.bot.get_channel(self.channel)
 
-		if reaction.count < self.min_react:
+		reaction = discord.utils.get(message.reactions, emoji = reaction_payload.emoji)
+
+		if reaction == None or reaction.count < self.min_react:
 			star_msg = self.starred_messages.pop(message.id, None)
 			await star_msg.delete()
 		else:
