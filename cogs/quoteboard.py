@@ -14,6 +14,7 @@ class Quoteboard(commands.Cog):
 		self.min_react = 1
 		self.channel = setupdict["channels"]["quote-board"]
 		self.starred_messages = {}
+		#need to fix this to persist through restarts
 
 	@commands.Cog.listener()
 	async def on_reaction_add(self, reaction, user):
@@ -44,7 +45,7 @@ class Quoteboard(commands.Cog):
 			star_msg = self.starred_messages.pop(message.id, None)
 			await star_msg.delete()
 		else:
-			embedVar = discord.Embed(title=f'{message.author.name} in #{message.channel}', \
+			embedVar = discord.Embed(
 									description=f"[View Message]({message.jump_url})\n \
 									{message.content}", \
 									color=0x994BEA)

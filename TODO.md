@@ -5,3 +5,4 @@
     + rent-breakdown
     + house-meeting?
 - monthly challenges
+- fix quote-board to persist through reloads
