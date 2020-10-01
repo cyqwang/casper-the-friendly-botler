@@ -79,7 +79,7 @@ class Roles(commands.Cog):
 		for role in self.roles:
 			text += f"{role} - {self.roles[role]}\n"
 		first_role = list(self.roles.keys())[0]
-		text += f"Example: +{first_role} or -{first_role}. \n\n"
+		text += f"\nExample: +{first_role} or -{first_role}. \n\n"
 		return text
 
 	@commands.command(name='role-add')
