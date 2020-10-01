@@ -25,7 +25,7 @@ class Roles(commands.Cog):
 		if self.channel is None: pass
 		else:
 			channel = self.bot.get_channel(self.channel)
-			if self.rolesdict["roles-message"] is not None:
+			if "roles-message" in self.rolesdict:
 				self.role_message = await channel.fetch_message(self.rolesdict["roles-message"])
 			else:
 				self.role_message = await channel.send(self.roles_text())
