@@ -35,6 +35,7 @@ class Quoteboard(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_reaction_remove(self, reaction, user):
+		print("here")
 		if (reaction.emoji != self.reaction): return
 
 		message = reaction.message
