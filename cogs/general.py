@@ -65,5 +65,10 @@ class General(commands.Cog):
 			return
 		await ctx.send(f"{cog} reloaded.")
 
+	@commands.command(name="version")
+	@commands.is_owner()
+	async def version(self, ctx):
+		await ctx.send(discord.__version__)
+
 def setup(bot):
     bot.add_cog(General(bot))
