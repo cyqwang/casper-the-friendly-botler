@@ -7,6 +7,9 @@ import json
 import discord
 from discord.ext import tasks, commands
 
+intents = discord.Intents.default()
+intents.members = True
+
 setupfile = open("load/setup.json", "r")
 setupdict = json.loads(setupfile.read())
 setupfile.close()
@@ -14,7 +17,7 @@ setupfile.close()
 TOKEN = setupdict['token']
 
 #general bot meta
-bot = commands.Bot(command_prefix='👻')
+bot = commands.Bot(command_prefix='👻', intents=intents)
 bot.remove_command('help')
 
 @bot.event
